@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SportMatch - 體育競賽配對平台</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../Home/styles.css" />
+    <link rel="stylesheet" href="../login/login.css" />
+    <link rel="stylesheet" href="register.css" />
+    <style>
+      .user-email-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      .user-email {
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content button {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        border: none;
+        background: none;
+        text-align: left;
+      }
+
+      .dropdown-content button:hover {
+        background-color: #f1f1f1;
+      }
+
+      .user-email-container:hover .dropdown-content {
+        display: block;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+      }
+
+      .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close-modal:hover,
+      .close-modal:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 導航欄 -->
+    <header class="main-header">
+      <div class="header-container">
+        <div class="logo">
+          <!-- Logo 這裡可以放置你的網站 Logo -->
+        </div>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#home">首頁</a></li>
+            <li><a href="#matching">配對系統</a></li>
+            <li><a href="#events">賽事資訊</a></li>
+            <li><a href="#venues">場地預約</a></li>
+            <li><a href="#shop">運動商城</a></li>
+          </ul>
+          <div class="header-actions">
+            <div class="search-bar">
+              <input type="text" placeholder="搜尋比賽、場地或商品" />
+              <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+              <button onclick="openLoginModal()" class="btn-login">登入</button>
+              <a href="register/register.html" class="btn-register">註冊</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- 登入彈窗 -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <div class="login-header">
+          <h2>會員登入</h2>
+          <button class="close-modal" onclick="closeModal()">&times;</button>
+          <div class="sports-icons sports-icons-marquee">
+            <i class="fas fa-basketball-ball"></i>
+            <i class="fas fa-futbol"></i>
+            <i class="fas fa-volleyball-ball"></i>
+          </div>
+        </div>
+        <form class="login-form">
+          <div class="input-group">
+            <i class="fas fa-person"></i>
+            <input type="email" id="email" placeholder="運動員帳號" required />
+            <button type="button" class="toggle-password">
+              <span class="icon"
+                ><ion-icon name="mail-outline"></ion-icon
+              ></span>
+            </button>
+          </div>
+
+          <div class="input-group password-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="密碼" required />
+            <button type="button" class="toggle-password">
+              <span class="icon"
+                ><ion-icon name="eye-off-outline" id="Pwhide"></ion-icon
+              ></span>
+            </button>
+          </div>
+          <div class="remember-me">
+            <label class="checkbox-container">
+              <input type="checkbox" id="remember" />
+              <span class="checkmark"></span>
+              記住我的帳號
+            </label>
+          </div>
+          <button type="submit" class="btn-submit" onclick="closeModal()">
+            <i class="fas fa-running"></i> 開始運動
+          </button>
+          <div class="form-footer">
+            <a href="../forgotPassoword/forgot-password.html">
+              <i class="fas fa-key"></i> 忘記密碼？
+            </a>
+            <a href="register/register.html">
+              <i class="fas fa-user-plus"></i> 加入會員
+            </a>
+          </div>
+        </form>
+        <div class="social-login">
+          <p>其他登入方式</p>
+          <div class="social-buttons">
+            <button class="social-btn facebook">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button class="social-btn google">
+              <i class="fab fa-google"></i>
+            </button>
+            <button class="social-btn line">
+              <i class="fab fa-line"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero 區域 -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <h1>找到你的運動夥伴</h1>
+        <p>立即加入 SportMatch，連結熱愛運動的夥伴！</p>
+        <div class="hero-buttons">
+          <button class="btn-primary">開始配對</button>
+          <button class="btn-secondary">快速入門</button>
+        </div>
+      </div>
+      <img src="/Home/icon.jpg" alt="" />
+    </section>
+
+    <!-- 特色功能區 -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <h2>平台特色</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-users"></i>
+            <h3>智能配對</h3>
+            <p>根據程度、位置自動配對最適合的對手</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>場地預約</h3>
+            <p>輕鬆預約全台優質運動場地</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-trophy"></i>
+            <h3>賽事系統</h3>
+            <p>即時追蹤賽事進度與成績</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-store"></i>
+            <h3>運動商城</h3>
+            <p>精選優質運動裝備與用品</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 當季賽事區 -->
+    <section id="events" class="events-section">
+      <div class="container">
+        <h2>當季賽事</h2>
+        <div class="events-carousel">
+          <button class="carousel-button prev">&#10094;</button>
+          <div class="carousel-container">
+            <div class="carousel-track">
+              <div class="carousel-slide">
+                <img src="event1.jpg" alt="籃球賽" />
+                <div class="event-info">
+                  <h3>城市籃球聯賽</h3>
+                  <p class="event-date">
+                    <i class="far fa-calendar"></i> 2024/04/15
+                  </p>
+                  <p class="event-location">
+                    <i class="fas fa-location-dot"></i> 台北體育館
+                  </p>
+                  <button class="btn-event">立即報名</button>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="event2.jpg" alt="排球賽" />
+                <div class="event-info">
+                  <h3>大專盃排球賽</h3>
+                  <p class="event-date">
+                    <i class="far fa-calendar"></i> 2024/05/01
+                  </p>
+                  <p class="event-location">
+                    <i class="fas fa-location-dot"></i> 新莊體育館
+                  </p>
+                  <button class="btn-event">立即報名</button>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="event3.jpg" alt="羽球賽" />
+                <div class="event-info">
+                  <h3>全國羽球錦標賽</h3>
+                  <p class="event-date">
+                    <i class="far fa-calendar"></i> 2024/05/15
+                  </p>
+                  <p class="event-location">
+                    <i class="fas fa-location-dot"></i> 台中體育館
+                  </p>
+                  <button class="btn-event">立即報名</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-button next">&#10095;</button>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 場地推薦區 -->
+    <section id="venues" class="venues-section">
+      <div class="container">
+        <h2>精選場地</h2>
+        <div class="venues-slider">
+          <div class="venue-card">
+            <img src="venue1.jpg" alt="場地照片" />
+            <div class="venue-info">
+              <h3>陽光運動中心</h3>
+              <p class="venue-location">台北市大安區</p>
+              <div class="venue-features">
+                <span><i class="fas fa-parking"></i> 停車場</span>
+                <span><i class="fas fa-shower"></i> 淋浴間</span>
+                <span><i class="fas fa-wifi"></i> WiFi</span>
+              </div>
+              <button class="btn-venue">預約場地</button>
+            </div>
+          </div>
+          <!-- 可以新增更多場地卡片 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>關於 SportMatch</h3>
+            <p>我們致力於打造最優質的運動社群平台，連結熱愛運動的每個人。</p>
+          </div>
+          <div class="footer-section">
+            <h3>快速連結</h3>
+            <ul>
+              <li><a href="#about">關於我們</a></li>
+              <li><a href="#help">幫助中心</a></li>
+              <li><a href="#privacy">隱私政策</a></li>
+              <li><a href="#terms">使用條款</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>聯絡資訊</h3>
+            <p><i class="fas fa-location-dot"></i> 台中市南屯區公益路100號</p>
+            <p><i class="fas fa-envelope"></i> a0972299435@gmail.com</p>
+            <p><i class="fas fa-phone"></i> 0909350792</p>
+          </div>
+          <div class="footer-section">
+            <h3>追蹤我們</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-line"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 SportMatch. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="register.js" defer></script>
+    <script src="../login/login.js"></script>
+    <script src="../Home/script.js"></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
