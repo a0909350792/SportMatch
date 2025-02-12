@@ -1,0 +1,398 @@
+/* 基本變數 */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #3b82f6;
+  --accent-color: #f59e0b;
+  --text-color: #1f2937;
+  --light-text: #6b7280;
+  --background: #ffffff;
+  --light-bg: #f3f4f6;
+  --border-radius: 8px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --font-family: "Noto Sans TC", sans-serif;
+  --line-height: 1.6;
+}
+
+/* 通用樣式重置 */
+body,
+h1,
+p,
+a,
+form,
+input,
+button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* 基本排版 */
+body {
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  background-color: var(--background);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 導航欄樣式 */
+.main-header {
+  background: white;
+  box-shadow: var(--shadow);
+  width: 100%;
+  z-index: 1000;
+  position: fixed; /* 固定在頁面頂部 */
+  top: 0;
+  left: 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  display: flex;
+  align-items: center;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: var(--primary-color);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem; /* 增加間距 */
+}
+
+.header-actions .search-bar {
+  margin-right: 20px;
+  flex-grow: 1;
+}
+
+.header-actions .search-bar input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.header-actions .search-bar button {
+  padding: 0.5rem;
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header-actions .user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 30px;
+}
+
+.header-actions .user-actions button,
+.header-actions .user-actions a {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  position: relative;
+  padding: 0;
+}
+
+.header-actions .user-actions button:hover,
+.header-actions .user-actions a:hover {
+  color: var(--primary-color);
+}
+
+.header-actions .user-actions .btn-cart,
+.header-actions .user-actions .btn-notifications {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--light-bg);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.header-actions .user-actions .btn-cart:hover,
+.header-actions .user-actions .btn-notifications:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.header-actions .user-actions .btn-cart::after,
+.header-actions .user-actions .btn-notifications::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .carousel-slide img {
+    height: 300px;
+  }
+}
+
+/* 按鈕樣式 */
+.btn-login,
+.btn-register {
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.btn-login {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-login:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+}
+
+.btn-login:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.2);
+}
+
+.btn-register {
+  background: var(--primary-color);
+  border: none;
+  color: blue;
+}
+
+.user-email-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-email {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  top: 20px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+.user-email-container:hover .dropdown-content,
+.user-email-container:focus-within .dropdown-content {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.notifications-dropdown,
+.cart-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 300px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.notifications-dropdown.active,
+.cart-dropdown.active {
+  display: block;
+}
+
+.notifications-dropdown .notification-item,
+.cart-dropdown .cart-item {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.notifications-dropdown .notification-item:last-child,
+.cart-dropdown .cart-item:last-child {
+  border-bottom: none;
+}
+
+.notifications-dropdown .notification-item p,
+.cart-dropdown .cart-item p {
+  margin: 0;
+}
+
+.notifications-dropdown .no-notifications,
+.cart-dropdown .no-cart-items {
+  padding: 1rem;
+  text-align: center;
+  color: #999;
+}
+
+.user-email-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-email {
+  font-size: 16px;
+  color: #333;
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.btn-logout:hover {
+  color: var(--primary-color);
+}

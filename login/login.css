@@ -30,7 +30,6 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   border: 10px solid rgba(0, 0, 0, 0.5);
-  z-index: 1000;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(10px); /* 背景霧化 */
@@ -40,7 +39,6 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
@@ -77,7 +75,7 @@
 
 /* 只有在有 show 類時才顯示 */
 .modal.show {
-  display: flex ;
+  display: flex;
 }
 
 /* 確保模態框內容的動畫效果 */
@@ -90,7 +88,6 @@
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
 }
-
 
 /* 登入容器 */
 .login-container {

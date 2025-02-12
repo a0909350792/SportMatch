@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     successNotification.style.opacity = "0";
     setTimeout(() => {
       successNotification.style.display = "none";
-      window.location.href = "../index/index.html"; // 跳轉到 index.html
+      window.location.href = "../../index.html"; // 跳轉到 index.html
     }, 300); // 與 CSS 過渡時間一致
   };
 

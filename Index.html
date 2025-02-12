@@ -10,85 +10,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../Home/styles.css" />
+    <link rel="stylesheet" href="../layout/layout.css" />
     <link rel="stylesheet" href="../login/login.css" />
     <link rel="stylesheet" href="register.css" />
-    <style>
-      .user-email-container {
-        position: relative;
-        display: inline-block;
-      }
-
-      .user-email {
-        cursor: pointer;
-      }
-
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-      }
-
-      .dropdown-content button {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        width: 100%;
-        border: none;
-        background: none;
-        text-align: left;
-      }
-
-      .dropdown-content button:hover {
-        background-color: #f1f1f1;
-      }
-
-      .user-email-container:hover .dropdown-content {
-        display: block;
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-
-      .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 500px;
-      }
-
-      .close-modal {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-
-      .close-modal:hover,
-      .close-modal:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-    </style>
   </head>
   <body>
-    <!-- 導航欄 -->
     <header class="main-header">
       <div class="header-container">
         <div class="logo">
@@ -100,17 +26,46 @@
             <li><a href="#home">首頁</a></li>
             <li><a href="#matching">配對系統</a></li>
             <li><a href="#events">賽事資訊</a></li>
-            <li><a href="#venues">場地預約</a></li>
+            <li><a href="#venues">場地資訊</a></li>
             <li><a href="#shop">運動商城</a></li>
           </ul>
           <div class="header-actions">
-            <div class="search-bar">
-              <input type="text" placeholder="搜尋比賽、場地或商品" />
-              <button><i class="fas fa-search"></i></button>
-            </div>
             <div class="user-actions">
+              <div class="cart-container" style="display: none">
+                <button class="btn-cart" data-count="0" onclick="toggleCart()">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+                <div class="cart-dropdown">
+                  <div class="no-cart-items">目前購物車是空的</div>
+                </div>
+              </div>
+              <div class="notifications-container" style="display: none">
+                <button
+                  class="btn-notifications"
+                  data-count="0"
+                  onclick="toggleNotifications()"
+                >
+                  <i class="fas fa-bell"></i>
+                </button>
+                <div class="notifications-dropdown">
+                  <div class="no-notifications">目前沒有任何通知</div>
+                </div>
+              </div>
               <button onclick="openLoginModal()" class="btn-login">登入</button>
               <a href="register/register.html" class="btn-register">註冊</a>
+              <div class="user-email-container" style="display: none">
+                <span class="user-email"></span>
+                <div class="dropdown-content">
+                  <a href="#profile">個人資料</a>
+                  <a href="#matches">配對資訊</a>
+
+                  <a href="#cart">購物車清單</a>
+                  <a href="#favorites">收藏清單</a>
+                  <button class="btn-logout" onclick="handleLogout()">
+                    登出
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </nav>
@@ -128,7 +83,7 @@
             <i class="fas fa-volleyball-ball"></i>
           </div>
         </div>
-        <form class="login-form">
+        <form class="login-form" onsubmit="handleLogin(event)">
           <div class="input-group">
             <i class="fas fa-person"></i>
             <input type="email" id="email" placeholder="運動員帳號" required />
@@ -155,16 +110,16 @@
               記住我的帳號
             </label>
           </div>
-          <button type="submit" class="btn-submit" onclick="closeModal()">
+          <button type="submit" class="btn-submit">
             <i class="fas fa-running"></i> 開始運動
           </button>
           <div class="form-footer">
-            <a href="../forgotPassoword/forgot-password.html">
-              <i class="fas fa-key"></i> 忘記密碼？
-            </a>
-            <a href="register/register.html">
-              <i class="fas fa-user-plus"></i> 加入會員
-            </a>
+            <a href="../forgotPassoword/forgot-password.html"
+              ><i class="fas fa-key"></i> 忘記密碼？</a
+            >
+            <a href="register/register.html"
+              ><i class="fas fa-user-plus"></i> 加入會員</a
+            >
           </div>
         </form>
         <div class="social-login">
@@ -176,9 +131,7 @@
             <button class="social-btn google">
               <i class="fab fa-google"></i>
             </button>
-            <button class="social-btn line">
-              <i class="fab fa-line"></i>
-            </button>
+            <button class="social-btn line"><i class="fab fa-line"></i></button>
           </div>
         </div>
       </div>

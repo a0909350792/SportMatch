@@ -459,3 +459,128 @@ function clearError(input) {
   }
   input.classList.remove("error");
 }
+
+function toggleNotifications() {
+  const dropdown = document.querySelector(".notifications-dropdown");
+  dropdown.classList.toggle("active");
+}
+
+function toggleCart() {
+  const dropdown = document.querySelector(".cart-dropdown");
+  dropdown.classList.toggle("active");
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+  const email = document.getElementById("email").value;
+  localStorage.setItem("loggedInEmail", email);
+  updateUIAfterLogin(email);
+  closeModal();
+}
+
+function handleLogout() {
+  localStorage.removeItem("loggedInEmail");
+  location.reload();
+}
+
+function handleSearch() {
+  const query = document.querySelector(".search-bar input").value;
+  alert(`搜尋: ${query}`);
+}
+
+function updateUIAfterLogin(email) {
+  document.querySelector(".btn-login").style.display = "none";
+  document.querySelector(".btn-register").style.display = "none";
+  document.querySelector(".user-email-container").style.display = "flex";
+  document.querySelector(".user-email").textContent = email;
+  document.querySelector(".cart-container").style.display = "flex";
+  document.querySelector(".notifications-container").style.display = "flex";
+}
+
+document.addEventListener("click", function (event) {
+  const notificationsDropdown = document.querySelector(
+    ".notifications-dropdown"
+  );
+  const cartDropdown = document.querySelector(".cart-dropdown");
+  if (
+    !event.target.closest(".btn-notifications") &&
+    !event.target.closest(".notifications-dropdown")
+  ) {
+    notificationsDropdown.classList.remove("active");
+  }
+  if (
+    !event.target.closest(".btn-cart") &&
+    !event.target.closest(".cart-dropdown")
+  ) {
+    cartDropdown.classList.remove("active");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const loggedInEmail = localStorage.getItem("loggedInEmail");
+  if (loggedInEmail) {
+    updateUIAfterLogin(loggedInEmail);
+  }
+});
+window.onload = function () {
+  if (localStorage.getItem("showLoginModal") === "true") {
+    showLoginPopup();
+    localStorage.removeItem("showLoginModal"); // 移除標記，避免刷新時再次彈出
+  }
+};
+
+//下拉選單
+function toggleNotifications() {
+  const dropdown = document.querySelector(".notifications-dropdown");
+  dropdown.classList.toggle("active");
+}
+
+function toggleCart() {
+  const dropdown = document.querySelector(".cart-dropdown");
+  dropdown.classList.toggle("active");
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+  const email = document.getElementById("email").value;
+  localStorage.setItem("loggedInEmail", email);
+  document.querySelector(".btn-login").style.display = "none";
+  document.querySelector(".btn-register").style.display = "none";
+  document.querySelector(".user-email-container").style.display = "flex";
+  document.querySelector(".user-email").textContent = email;
+  document.querySelector(".cart-container").style.display = "flex";
+  document.querySelector(".notifications-container").style.display = "flex";
+  closeModal();
+  document.body.style.overflow = "auto"; // 允許滾動
+}
+
+function handleLogout() {
+  localStorage.removeItem("loggedInEmail");
+  document.querySelector(".btn-login").style.display = "block";
+  document.querySelector(".btn-register").style.display = "block";
+  document.querySelector(".user-email-container").style.display = "none";
+  document.querySelector(".cart-container").style.display = "none";
+  document.querySelector(".notifications-container").style.display = "none";
+}
+
+function openLoginModal() {
+  document.getElementById("loginModal").style.display = "block";
+  document.body.style.overflow = "hidden"; // 禁止滾動
+}
+
+function closeModal() {
+  document.getElementById("loginModal").style.display = "none";
+  document.body.style.overflow = "auto"; // 允許滾動
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const loggedInEmail = localStorage.getItem("loggedInEmail");
+  if (loggedInEmail) {
+    document.querySelector(".btn-login").style.display = "none";
+    document.querySelector(".btn-register").style.display = "none";
+    document.querySelector(".user-email-container").style.display = "flex";
+    document.querySelector(".user-email").textContent = loggedInEmail;
+    document.querySelector(".cart-container").style.display = "flex";
+    document.querySelector(".notifications-container").style.display = "flex";
+  }
+});
